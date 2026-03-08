@@ -1,0 +1,11 @@
+# Python
+__pycache__/
+*.pyc
+venv/
+
+# Large data files (re-generate with scripts)
+claude work/data/*.json
+claude work/data/*.json.backup
+
+# Secrets
+.env
