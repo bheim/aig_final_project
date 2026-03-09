@@ -206,6 +206,19 @@ def compute_surprise_for_papers(all_papers, ref_fields, baseline):
         # Count distinct fields cited (simple diversity measure)
         n_distinct_fields = sum(1 for g in ALL_FIELDS if ref_field_counts.get(g, 0) > 0)
 
+        # Within-field citation share: fraction of resolved refs pointing
+        # to papers in the same field as the focal paper
+        own_field_mapped = map_field(focal_field)
+        within_field_refs = ref_field_counts.get(own_field_mapped, 0)
+        within_field_share = within_field_refs / n_refs_resolved
+
+        # HHI (Herfindahl) of citation field distribution — measures
+        # concentration. HHI=1 means all refs in one field, lower = more diverse.
+        hhi = sum(s ** 2 for s in q_i.values())
+
+        # Share of references pointing to "Other" (outside our tracked fields)
+        other_share = q_i.get("Other", 0)
+
         rows.append({
             "paper_id": paper.get("id"),
             "publication_date": pub_date,
@@ -220,6 +233,9 @@ def compute_surprise_for_papers(all_papers, ref_fields, baseline):
             "n_references": n_total_refs,
             "n_references_resolved": n_refs_resolved,
             "n_distinct_fields_cited": n_distinct_fields,
+            "within_field_share": round(within_field_share, 6),
+            "citation_hhi": round(hhi, 6),
+            "other_field_share": round(other_share, 6),
             "surprise_kl": round(kl_surprise, 6),
             "surprise_entropy": round(entropy, 6),
         })

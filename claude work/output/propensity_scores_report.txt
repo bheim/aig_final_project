@@ -4,26 +4,34 @@ VALIDATION REPORT: AI Propensity Scores
 
 4a. Field Rankings (by propensity_ratio, descending):
   Computer Science                +0.4103
+  Materials Science               +0.3479
   Business, Management and Accounting  +0.3172
+  Economics, Econometrics and Finance  +0.3114
+  Engineering                     +0.2490
   Agricultural and Biological Sciences  +0.2466
+  Environmental Science           +0.2364
+  Neuroscience                    +0.2314
   Chemistry                       +0.2300
+  Social Sciences                 +0.2211
   Arts and Humanities             +0.1894
   Physics and Astronomy           +0.1879
   Mathematics                     +0.1874
   Psychology                      +0.1647
+  Medicine                        +0.1540
+  Nursing                         +0.1365
 
   Expected high: Computer Science, Business & Management, Mathematics
   Expected low:  Chemistry, Physics & Astronomy
 
 4c. Cross-field variation:
-  Min:    0.1647
+  Min:    0.1365
   Max:    0.4103
-  Range:  0.2456
-  Std:    0.0835
-  Mean:   0.2417
+  Range:  0.2738
+  Std:    0.0749
+  Mean:   0.2388
   OK: Sufficient variation for regression identification.
 
 4d. Ratio vs Binary consistency:
-  Correlation between ratio and binary scores: 0.0400
-  Rank correlation (Spearman): 0.5150
+  Correlation between ratio and binary scores: 0.4351
+  Rank correlation (Spearman): 0.5048
   WARNING: Rankings differ. Investigate field-specific word list issues.

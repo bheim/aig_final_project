@@ -1,0 +1,5 @@
+Model,beta,se,t_stat,p_value,sig,R2,N
+A: Marker rate only,0.9938,0.091,10.92,0.0,***,0.0023,53028
+B: + Field FE,0.3363,0.0927,3.629,0.0003,***,0.0658,53028
+C: + Field & Time FE + Controls,0.6589,0.0941,7.001,0.0,***,0.1211,53028
+D: LLM flag (binary) + Full,0.0352,0.0073,4.79,0.0,***,0.1206,53028

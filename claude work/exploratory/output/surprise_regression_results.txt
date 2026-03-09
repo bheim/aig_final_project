@@ -1,0 +1,31 @@
+======================================================================
+OLS: Marker Word Rate → Citation Surprise
+DV: log(surprise_kl + 1e-6)
+======================================================================
+
+Model A: Marker rate only
+  β = +0.9938 ***
+  SE = 0.0910
+  t = 10.920, p = 0.0000
+  R² = 0.0023, N = 53028
+
+Model B: + Field FE
+  β = +0.3363 ***
+  SE = 0.0927
+  t = 3.629, p = 0.0003
+  R² = 0.0658, N = 53028
+
+Model C: + Field & Time FE + Controls
+  β = +0.6589 ***
+  SE = 0.0941
+  t = 7.001, p = 0.0000
+  R² = 0.1211, N = 53028
+
+Model D: LLM flag (binary) + Full
+  β = +0.0352 ***
+  SE = 0.0073
+  t = 4.790, p = 0.0000
+  R² = 0.1206, N = 53028
+
+Notes: HC1 robust SEs. Controls = num_authors, n_references, institutions.
+*** p<0.01, ** p<0.05, * p<0.10

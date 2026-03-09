@@ -1,8 +1,8 @@
-# Project Handoff: AI Adoption & Research Surprise
+# Project Handoff: AI Adoption & Citation Behavior
 
 ## What This Project Does
 
-Diff-in-diff estimating the impact of AI adoption on the "surprise" (citation novelty) of academic papers across 8 fields. Two temporal shocks: GPT-3.5 (Nov 2022) gives us field-level AI propensity scores, GPT-4o (May 2024) is the treatment event.
+Diff-in-diff estimating the impact of AI adoption on citation behavior of academic papers across 16 fields. Two temporal shocks: GPT-3.5 (Nov 2022) gives us field-level AI propensity scores, GPT-4o (May 2024) is the treatment event.
 
 The full methodology is documented in:
 
@@ -20,82 +20,85 @@ claude work/
 ├── Kobak_Implementation...md ← propensity score methodology
 ├── scripts/                  ← all pipeline code (Python)
 ├── data/                     ← raw + intermediate data files
-├── output/                   ← final results (regression tables, reports)
+├── output/                   ← final results (regression tables, reports, figures)
+├── exploratory/              ← standalone exploratory pipeline (Kobak marker word analysis)
 └── venv/                     ← Python virtual environment
 ```
 
 ---
 
-## Key Results (Already Computed)
+## Key Results (67,008 observations, 16 fields)
 
-Everything has been run end-to-end, including robustness checks. Here's where to find results:
+### Headline Findings
+
+**Citation surprise (KL divergence) shows no treatment effect** — beta1 = +0.05, p = 0.52. However, **citation diversity measures show significant effects that grow over time:**
+
+| DV | Level Effect (beta1) | p-value | Trend (per month) | Trend p |
+|---|---|---|---|---|
+| Log Surprise (KL) | +0.050 | 0.517 | +0.015 | 0.359 |
+| Distinct Fields Cited | +1.072*** | <0.001 | +0.105** | 0.028 |
+| Within-Field Share | −0.071** | 0.040 | −0.014** | 0.046 |
+| Citation HHI | −0.097*** | <0.001 | −0.015*** | 0.005 |
+| Reference Count | +10.10*** | 0.005 | +0.670 | 0.307 |
+| Shannon Entropy | +0.209*** | <0.001 | +0.030*** | 0.005 |
+| Other-Field Share | +0.042*** | 0.008 | −0.0004 | 0.887 |
+
+**Interpretation:** AI-heavy fields are diversifying their citation patterns — citing more distinct fields, distributing citations more evenly, and becoming less insular. But they're branching into fields already somewhat represented in their baseline (hence no KL surprise effect). The diversity effect is growing over time, consistent with gradual diffusion of AI tools into research workflows.
+
+### Output Files
 
 | File | What It Contains |
 |------|-----------------|
-| `output/regression_results.txt` | Main regression table (3 models) |
+| `output/regression_results.txt` | Main regression table — 15 models (7 DVs × level/trend + 1 no-FE) |
 | `output/regression_table.csv` | Same coefficients in CSV format |
-| `output/robustness_results.txt` | 13 robustness checks (all significant) |
+| `output/robustness_results.txt` | Per-DV robustness batteries (9 specs each, +3 for log surprise) |
 | `output/robustness_table.csv` | Same in CSV format |
-| `output/parallel_trends_check.txt` | Pre-trend test (p=0.454, passes) |
+| `output/event_study_results.txt` | Propensity × quarter interactions for all 7 DVs |
+| `output/event_study_table.csv` | Same in CSV format |
+| `output/dv_summary.csv` | One-line-per-DV summary |
+| `output/parallel_trends_check.txt` | Pre-trend test |
 | `output/propensity_scores_report.txt` | Validation of propensity scores |
+| `output/fig_entropy_by_propensity.png` | Shannon entropy over time: high vs low propensity fields |
+| `output/fig_event_study.png` | Event study coefficient plots (4 key DVs) |
 | `data/propensity_scores.csv` | AI propensity score per field |
-| `data/analysis_dataset.csv` | Full paper-level dataset (33,149 obs) ready for custom analysis |
-| `data/phase2_with_surprise.csv` | Same data, before merging propensity scores |
-
-### Headline Numbers
-
-- **beta1 (preferred model, field×time FE):** 0.5649 (p<0.01) — higher-AI-exposure fields see significantly more surprising citation patterns post-4o
-- **Parallel trends:** p=0.454, no differential pre-trend detected
-- **N:** 33,149 papers across 8 fields, Jan 2021–Dec 2025
-- **Robustness:** 13/13 specifications return significant positive beta1
+| `data/analysis_dataset.csv` | Full paper-level dataset (67,008 obs) |
 
 ### Propensity Score Rankings (highest AI adoption → lowest)
 
 1. Computer Science (0.41)
-2. Business, Management and Accounting (0.32)
-3. Agricultural and Biological Sciences (0.25)
-4. Chemistry (0.23)
-5. Arts and Humanities (0.19)
-6. Physics and Astronomy (0.19)
-7. Mathematics (0.19)
-8. Psychology (0.16)
-
-### Robustness Summary
-
-All 13 specifications significant at p<0.05, 12 at p<0.01:
-
-| Specification | beta1 | p-value |
-|---|---|---|
-| Baseline | 0.5649 | <0.001 |
-| Log(surprise) | 1.8461 | <0.001 |
-| Winsorized (95th) | 0.4380 | <0.001 |
-| Winsorized (99th) | 0.5303 | <0.001 |
-| Binary propensity | 0.6093 | <0.001 |
-| Drop Arts & Humanities | 0.5236 | <0.001 |
-| Drop Psychology | 0.5624 | <0.001 |
-| Drop both | 0.5183 | <0.001 |
-| Shannon entropy | 0.2670 | 0.016 |
-| Cutoff: Aug 2024 | 0.5681 | <0.001 |
-| Cutoff: Feb 2025 | 0.5434 | <0.001 |
-| Min 5 refs | 0.5156 | <0.001 |
-| Min 10 refs | 0.5231 | <0.001 |
+2. Materials Science (0.35)
+3. Business, Management and Accounting (0.32)
+4. Economics, Econometrics and Finance (0.31)
+5. Engineering (0.25)
+6. Agricultural and Biological Sciences (0.25)
+7. Environmental Science (0.24)
+8. Neuroscience (0.23)
+9. Chemistry (0.23)
+10. Social Sciences (0.22)
+11. Arts and Humanities (0.19)
+12. Physics and Astronomy (0.19)
+13. Mathematics (0.19)
+14. Psychology (0.16)
+15. Medicine (0.15)
+16. Nursing (0.14)
 
 ---
 
 ## Scripts
 
-All scripts live in `scripts/`. They run sequentially and checkpoint progress, so any step can be re-run independently.
+All scripts live in `scripts/`. They run sequentially and checkpoint progress.
 
 | Script | What It Does | Runtime |
 |--------|-------------|---------|
 | `00_verify_field_ids.py` | Validates OpenAlex field IDs | ~1s |
-| `01_get_marker_words.py` | Downloads Kobak et al. marker word list, filters to ~434 LLM style words | ~5s |
-| `02_collect_phase1_abstracts.py` | Samples 1000 abstracts/field/window from OpenAlex for propensity scores | ~10s |
+| `01_get_marker_words.py` | Downloads Kobak et al. marker word list | ~5s |
+| `02_collect_phase1_abstracts.py` | Samples 1000 abstracts/field/window for propensity | ~10s |
 | `03_compute_propensity_scores.py` | Computes AI propensity ratio + validation | ~1s |
-| `04_collect_phase2_papers.py` | Samples 100 papers/field/month (Jan 2021–Dec 2025) + resolves reference fields | ~2-3 hrs |
-| `05_compute_surprise.py` | Builds baseline co-citation distribution, computes KL divergence per paper | ~2s |
-| `06_run_regression.py` | Runs 3 diff-in-diff models + parallel trends check | ~5s |
-| `07_robustness_checks.py` | Runs 13 robustness specifications (no API calls) | ~30s |
+| `04_collect_phase2_papers.py` | Samples papers + resolves reference fields | ~2-3 hrs |
+| `05_compute_surprise.py` | Builds baseline, computes KL divergence + all DVs per paper | ~2s |
+| `06_run_regression.py` | Runs diff-in-diff models for all 7 DVs + parallel trends check | ~5s |
+| `07_robustness_checks.py` | Runs robustness specs using Model 2 | ~30s |
+| `rerun_all.py` | Numpy-based output generator — all tables, robustness, event study, trend models | ~30s |
 
 Utility scripts:
 
@@ -104,75 +107,95 @@ Utility scripts:
 | `run_all.py` | Orchestrates scripts 00-06 sequentially |
 | `config.py` | All settings (API key, fields, time windows, sample sizes) |
 | `utils.py` | Shared helpers (API calls, pagination, checkpointing) |
-| `debug_api.py` | Diagnostic tool for OpenAlex API connectivity issues |
+| `debug_api.py` | Diagnostic tool for OpenAlex API connectivity |
 | `fix_checkpoint.py` | One-time fix for rate-limit-poisoned checkpoint entries |
+
+Figure generation scripts (in `output/`):
+
+| Script | Output |
+|--------|--------|
+| `fig_entropy_by_propensity.py` | Shannon entropy time series, high vs low propensity |
+| `fig_event_study.py` | Event study coefficient plots for 4 key DVs |
 
 Run everything: `python run_all.py`
 Run from a specific step: `python run_all.py --from 5`
 Run one step only: `python run_all.py --only 6`
-Run robustness checks: `python 07_robustness_checks.py`
+Regenerate output tables: `python rerun_all.py`
 
 ### Config
 
 All settings are in `scripts/config.py`:
 
 - `OPENALEX_API_KEY` — set via environment variable: `export OPENALEX_API_KEY=your_key`
-- `FIELDS` / `FIELD_IDS` — the 8 fields and their OpenAlex numeric IDs (use numbers only, not full URLs)
+- `FIELDS` / `FIELD_IDS` — the 16 fields and their OpenAlex numeric IDs
 - `PHASE1_SAMPLE_SIZE` — abstracts per field per window (currently 1000)
 - `PHASE2_PAPERS_PER_MONTH` — papers per field per month (currently 100)
 - `POST_4O_DATE` — treatment cutoff (2024-11-01, with 6-month pub lag)
 
 ---
 
+## Seven Dependent Variables
+
+| DV | Column | Description |
+|---|---|---|
+| Log Surprise | `log_surprise` | log(KL divergence + 1e-6) — how unusual citations are relative to field baseline |
+| Distinct Fields | `n_distinct_fields_cited` | Count of unique fields cited — extensive margin diversity |
+| Within-Field Share | `within_field_share` | Fraction of refs to own field — citation insularity |
+| Citation HHI | `citation_hhi` | Herfindahl index of citation field distribution — concentration |
+| Reference Count | `n_references` | Total number of references |
+| Shannon Entropy | `surprise_entropy` | Expected surprise of citation distribution — intensive margin diversity |
+| Other-Field Share | `other_field_share` | Fraction of refs outside our 16 tracked fields |
+
+---
+
 ## Data Files
 
-| File | Size | Description |
-|------|------|-------------|
-| `data/marker_words.txt` | 4 KB | 434 LLM style words (one per line) |
-| `data/marker_words.csv` | 13 KB | Same with Kobak annotations |
-| `data/propensity_scores.csv` | <1 KB | 8 rows, one per field |
-| `data/phase1_abstracts.json` | 33 MB | 16,000 abstracts (8 fields × 2 windows × 1000) |
-| `data/phase2_papers.json` | 63 MB | ~48,000 papers with metadata + reference lists |
-| `data/reference_fields.json` | 67 MB | ~1.1M reference → field mappings |
-| `data/phase2_with_surprise.csv` | 4.6 MB | Paper-level dataset with surprise scores |
-| `data/analysis_dataset.csv` | 6.2 MB | Final regression-ready dataset (with propensity merged in) |
+| File | Description |
+|------|-------------|
+| `data/marker_words.txt` | 434 LLM style words |
+| `data/propensity_scores.csv` | 16 rows, one per field |
+| `data/phase1_abstracts.json` | ~32,000 abstracts for propensity scoring |
+| `data/phase2_papers.json` | ~96,000 papers with metadata + references |
+| `data/reference_fields.json` | Reference → field mappings |
+| `data/phase2_with_surprise.csv` | Paper-level dataset with all DV columns |
+| `data/analysis_dataset.csv` | Final regression-ready dataset (67,008 obs) |
 
-Note: The large JSON files are gitignored. Regenerate them by running the pipeline from the relevant step.
+Note: Large JSON files are gitignored. Regenerate by running the pipeline.
+
+---
+
+## Exploratory Pipeline
+
+A separate standalone pipeline in `exploratory/` uses Kobak marker words to identify LLM-written abstracts and explore patterns across subfields, authors, institutions, etc. This is a non-causal descriptive analysis.
+
+| Script | What It Does |
+|--------|-------------|
+| `exploratory/scripts/01_collect_papers.py` | Collects papers with abstracts + reference fields |
+| `exploratory/scripts/02_score_abstracts.py` | Scores abstracts using Kobak marker words |
+| `exploratory/scripts/03_compute_surprise.py` | Independent KL divergence computation |
+| `exploratory/scripts/04_analyze.py` | Generates 11 figures + tables |
+| `exploratory/scripts/run_all.py` | Orchestrator with --from and --only flags |
 
 ---
 
 ## If You Want to Re-Run or Modify
 
-**Run robustness checks:** `python 07_robustness_checks.py` — no API calls, uses existing data.
+**Regenerate output tables:** `python rerun_all.py` — no API calls, reads analysis_dataset.csv.
 
-**Change the regression spec:** Edit `06_run_regression.py` and run `python run_all.py --only 6`. The analysis dataset is already built — no API calls needed.
+**Change the regression spec:** Edit `06_run_regression.py` or `rerun_all.py` and run.
 
 **Change surprise computation:** Edit `05_compute_surprise.py` and run `python run_all.py --from 5`.
 
-**Change sample sizes or fields:** Edit `config.py`, delete relevant checkpoint files in `data/`, and re-run from the appropriate step.
+**Change sample sizes or fields:** Edit `config.py`, delete relevant checkpoint files, re-run.
 
-**Python environment:** Activate with `source venv/bin/activate`. Dependencies are in `scripts/requirements.txt`.
-
----
-
-## Interpretive Notes
-
-**The sign flip between models:** beta1 is insignificant and slightly negative in Models 1-2 (no FE / field+time FE), but flips to significantly positive in Model 3 (field×time FE). This means the effect is identified from within-field-month variation after absorbing field-specific trends, not from raw cross-field comparisons. Worth discussing in the paper.
-
-**Raw surprise diffs vs regression:** The simple pre/post surprise difference by field is actually weakly negatively correlated with propensity (-0.20). Mathematics had the largest raw surprise increase despite low propensity. The regression result emerges after controlling for field-specific time trends.
-
-**Surprise distribution:** Highly right-skewed (skewness 3.5, kurtosis 20). The log-transform robustness check (beta=1.85, p<0.001) confirms the result isn't driven by outliers.
-
-**Arts & Humanities sample:** Averages only 34 obs/month (target was 100). Dropping it doesn't change the result (beta=0.52 vs 0.56).
-
-**Propensity score measurement:** The ratio and binary propensity measures have low rank correlation (0.52), but the result holds with either measure.
+**Python environment:** `source venv/bin/activate`. Dependencies in `scripts/requirements.txt`.
 
 ---
 
 ## Known Limitations
 
-- OpenAlex field names are their full ASJC names (e.g., "Agricultural and Biological Sciences" not "Biology"). The `FIELD_SHORT` dict in config.py maps to shorter labels.
-- ~7.4% of references resolve to "Unknown" (works deleted or not in OpenAlex). These are excluded from surprise computation.
-- Papers with fewer than 3 resolvable references are dropped from the surprise calculation.
-- The Kobak marker word list was developed on biomedical abstracts — may not transfer perfectly to all fields, but the ratio-based propensity score accounts for field-specific baselines.
-- R² is low (3.7% in Model 3). Surprise is inherently noisy — most variation is idiosyncratic to individual papers.
+- Kobak marker words developed on biomedical abstracts — may not transfer perfectly to all fields
+- ~7.4% of references resolve to "Unknown" (excluded from surprise computation)
+- Papers with <3 resolvable references are dropped
+- AI propensity is measured at the field level, not paper level
+- R² is modest (~7% for surprise, ~12-14% for diversity measures) — paper-level variation is inherently noisy

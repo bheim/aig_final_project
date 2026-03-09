@@ -35,11 +35,23 @@ Higher values indicate that the paper's citation pattern is more unusual relativ
 
 **Important:** The baseline distribution $P_f(g)$ must be computed using only pre-shock (pre-November 2022) data so that it is not contaminated by AI-influenced citation behavior.
 
+### Additional Outcome Variables
+
+We test seven dependent variables capturing different facets of citation behavior:
+
+1. **Log Surprise (KL divergence):** log-transformed to address heavy right skew
+2. **Distinct Fields Cited:** count of unique fields among resolved references — extensive margin diversity
+3. **Within-Field Share:** fraction of references pointing to papers in the focal paper's own field — citation insularity
+4. **Citation HHI (Herfindahl):** sum of squared field shares — concentration measure (1 = all refs in one field)
+5. **Reference Count:** total number of references
+6. **Shannon Entropy:** $H = -\sum_g q_i(g) \log q_i(g)$ — intensive margin diversity (sensitive to evenness of distribution)
+7. **Other-Field Share:** fraction of references pointing to fields outside our 16 tracked fields
+
 ---
 
 ## Fields
 
-We study the following 8 fields, defined using the `primary_topic.field.display_name` variable in OpenAlex:
+We study the following 16 fields, defined using the `primary_topic.field.display_name` variable in OpenAlex:
 
 1. Arts & Humanities
 2. Biology
@@ -49,6 +61,14 @@ We study the following 8 fields, defined using the `primary_topic.field.display_
 6. Mathematics
 7. Physics & Astronomy
 8. Psychology
+9. Medicine
+10. Engineering
+11. Social Sciences
+12. Economics, Econometrics and Finance
+13. Environmental Science
+14. Neuroscience
+15. Materials Science
+16. Nursing
 
 ---
 
@@ -99,7 +119,7 @@ If full text is not reliably available through OpenAlex, abstracts can be used i
 
 ### Sample
 
-For each of the 8 fields, sample **100 random papers per month** from **January 2021 through December 2025**. This yields approximately 48,000 observations (8 fields × 60 months × 100 papers).
+For each of the 16 fields, sample **100 random papers per month** from **January 2021 through December 2025**. This yields approximately 96,000 observations (16 fields × 60 months × 100 papers).
 
 Restrict the sample to journal articles (i.e., `type` = "article") to maintain comparability across fields and time periods.
 
@@ -129,7 +149,9 @@ Where:
 - $\phi_{ft}$ = field × time fixed effects (absorb field-specific trends)
 - $\varepsilon_{ift}$ = error term
 
-**Note on fixed effects:** Including both $\delta_f$, $\theta_t$, and $\phi_{ft}$ means the field and time main effects are absorbed. The field × time interactions are important because they control for field-specific trends in surprise that might exist independent of AI (e.g., if CS was already becoming more interdisciplinary over time). With $\phi_{ft}$ in the model, the AIPropensity main effect is absorbed, so $\beta_1$ is identified purely from the differential shift at the 4o threshold.
+**Note on fixed effects:** Model 2 (preferred specification) includes field FE ($\delta_f$) and time FE ($\theta_t$). Field × time FE ($\phi_{ft}$) were tested but dropped due to collinearity with the continuous treatment — they absorb too much of the identifying variation when treatment is field-level propensity × post.
+
+**Additional specification:** A treatment × time trend model adds $\beta_2 (\text{AIPropensity}_f \times D_t^{\text{after 4o}} \times \text{MonthsSinceCutoff}_t)$ to test whether the effect grows over time.
 
 ### Paper-Level Controls ($X_{ift}$)
 
@@ -189,7 +211,7 @@ This is the most data-intensive part of the collection. Each focal paper may hav
 ## Summary of Steps
 
 1. **Collect marker word data** for all 8 fields in the pre-period (Jan–Oct 2022) and post-period (Apr 2023–Apr 2024). Compute AI propensity scores as the ratio of marker word frequency.
-2. **Construct the baseline co-citation distribution** using all pre-November 2022 papers across the 8 fields.
+2. **Construct the baseline co-citation distribution** using all pre-November 2022 papers across the 16 fields.
 3. **Sample 100 papers per field per month** from Jan 2021–Dec 2025. For each paper, collect the variables listed above.
 4. **For each sampled paper, retrieve the field classification of every referenced work** to compute the surprise measure.
 5. **Compute surprise** for each paper using KL divergence against the pre-shock baseline.

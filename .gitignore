@@ -9,3 +9,6 @@ claude work/data/*.json.backup
 
 # Secrets
 .env
+claude work/exploratory/data/reference_fields_checkpoint.json
+claude work/exploratory/data/papers_checkpoint.json
+claude work/exploratory/data/scored_papers_with_abstracts.csv

@@ -26,6 +26,7 @@ os.makedirs(OUTPUT_DIR, exist_ok=True)
 # ─── Fields of Study ───────────────────────────────────────────────────────
 # Display names we use internally (must match OpenAlex display_name output)
 FIELDS = [
+    # ── Original 8 fields ──
     "Arts and Humanities",
     "Agricultural and Biological Sciences",
     "Business, Management and Accounting",
@@ -34,6 +35,15 @@ FIELDS = [
     "Mathematics",
     "Physics and Astronomy",
     "Psychology",
+    # ── Added 8 fields (for cross-sectional power) ──
+    "Medicine",
+    "Engineering",
+    "Social Sciences",
+    "Economics, Econometrics and Finance",
+    "Environmental Science",
+    "Neuroscience",
+    "Materials Science",
+    "Nursing",
 ]
 
 # Short labels for display / regression output
@@ -46,12 +56,21 @@ FIELD_SHORT = {
     "Mathematics": "Mathematics",
     "Physics and Astronomy": "Physics & Astronomy",
     "Psychology": "Psychology",
+    "Medicine": "Medicine",
+    "Engineering": "Engineering",
+    "Social Sciences": "Social Sciences",
+    "Economics, Econometrics and Finance": "Economics & Finance",
+    "Environmental Science": "Environmental Sci.",
+    "Neuroscience": "Neuroscience",
+    "Materials Science": "Materials Science",
+    "Nursing": "Nursing",
 }
 
 # OpenAlex field IDs — use NUMBER ONLY (not full URL)
 # Full URLs like "https://openalex.org/fields/17" return 0 results in filters.
 # Verify at runtime with: https://api.openalex.org/fields
 FIELD_IDS = {
+    # ── Original 8 ──
     "Arts and Humanities": "12",
     "Agricultural and Biological Sciences": "11",
     "Business, Management and Accounting": "14",
@@ -60,6 +79,15 @@ FIELD_IDS = {
     "Mathematics": "26",
     "Physics and Astronomy": "31",
     "Psychology": "32",
+    # ── Added 8 ──
+    "Medicine": "27",
+    "Engineering": "22",
+    "Social Sciences": "33",
+    "Economics, Econometrics and Finance": "20",
+    "Environmental Science": "23",
+    "Neuroscience": "28",
+    "Materials Science": "25",
+    "Nursing": "29",
 }
 
 # ─── Time Windows ──────────────────────────────────────────────────────────

@@ -1,35 +1,35 @@
 Parallel Trends Check
 ========================================
-Propensity × Trend coefficient: -0.002146
-p-value: 0.4540
+Propensity × Trend coefficient: 0.000028
+p-value: 0.9920
 
 Full model summary:
                             OLS Regression Results                            
 ==============================================================================
-Dep. Variable:            surprise_kl   R-squared:                       0.010
-Model:                            OLS   Adj. R-squared:                  0.010
-Method:                 Least Squares   F-statistic:                     50.15
-Date:                Sat, 07 Mar 2026   Prob (F-statistic):           1.22e-61
-Time:                        21:07:21   Log-Likelihood:                -15821.
-No. Observations:               26280   AIC:                         3.166e+04
-Df Residuals:                   26273   BIC:                         3.171e+04
+Dep. Variable:            surprise_kl   R-squared:                       0.009
+Model:                            OLS   Adj. R-squared:                  0.009
+Method:                 Least Squares   F-statistic:                     81.71
+Date:                Sun, 08 Mar 2026   Prob (F-statistic):          3.19e-102
+Time:                        21:58:08   Log-Likelihood:                -47470.
+No. Observations:               52704   AIC:                         9.495e+04
+Df Residuals:                   52697   BIC:                         9.502e+04
 Df Model:                           6                                         
 Covariance Type:                  HC1                                         
 ===============================================================================================
                                   coef    std err          z      P>|z|      [0.025      0.975]
 -----------------------------------------------------------------------------------------------
-const                           0.3681      0.018     19.932      0.000       0.332       0.404
-propensity_x_trend             -0.0021      0.003     -0.749      0.454      -0.008       0.003
-months_since_start              0.0016      0.001      2.312      0.021       0.000       0.003
-propensity_ratio                0.2180      0.074      2.937      0.003       0.073       0.363
-num_authors                    -0.0040      0.001     -6.572      0.000      -0.005      -0.003
-institutions_distinct_count     0.0005      0.000      4.038      0.000       0.000       0.001
-countries_distinct_count       -0.0312      0.003    -10.320      0.000      -0.037      -0.025
+const                           0.6999      0.018     38.211      0.000       0.664       0.736
+propensity_x_trend           2.771e-05      0.003      0.010      0.992      -0.005       0.005
+months_since_start              0.0011      0.001      1.663      0.096      -0.000       0.002
+propensity_ratio                0.0854      0.072      1.182      0.237      -0.056       0.227
+num_authors                    -0.0038      0.001     -4.950      0.000      -0.005      -0.002
+institutions_distinct_count     0.0008      0.000      3.916      0.000       0.000       0.001
+countries_distinct_count       -0.0524      0.003    -15.845      0.000      -0.059      -0.046
 ==============================================================================
-Omnibus:                    19780.612   Durbin-Watson:                   1.985
-Prob(Omnibus):                  0.000   Jarque-Bera (JB):           463279.361
-Skew:                           3.446   Prob(JB):                         0.00
-Kurtosis:                      22.380   Cond. No.                         913.
+Omnibus:                    28792.787   Durbin-Watson:                   1.953
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):           234787.640
+Skew:                           2.548   Prob(JB):                         0.00
+Kurtosis:                      11.997   Cond. No.                         843.
 ==============================================================================
 
 Notes:

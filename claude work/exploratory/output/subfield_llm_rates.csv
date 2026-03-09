@@ -1,0 +1,160 @@
+subfield,mean_marker_rate,llm_pct,n_papers,field
+"Tourism, Leisure and Hospitality Management",0.10281588411710095,0.5833333333333334,24,"Business, Management and Accounting"
+Management Information Systems,0.0950260736142688,0.6167146974063401,347,"Business, Management and Accounting"
+Communication,0.094733749201705,0.6666666666666666,48,Social Sciences
+Human Factors and Ergonomics,0.09144326264519209,0.576271186440678,59,Social Sciences
+Computer Science Applications,0.09055346219744717,0.5675675675675675,74,Computer Science
+Applied Psychology,0.08840658574669351,0.6330275229357798,109,Psychology
+Marketing,0.08828037441858307,0.5903307888040712,393,"Business, Management and Accounting"
+Organizational Behavior and Human Resource Management,0.08677105297280883,0.5701492537313433,335,"Business, Management and Accounting"
+Accounting,0.08623668112436818,0.5346687211093991,649,"Business, Management and Accounting"
+Biological Psychiatry,0.08526477202450636,0.47619047619047616,63,Neuroscience
+Education,0.08475045373807806,0.516566265060241,664,Social Sciences
+Strategy and Management,0.08425526504570421,0.5013812154696132,724,"Business, Management and Accounting"
+Human-Computer Interaction,0.08399146325744433,0.4358974358974359,78,Computer Science
+Developmental and Educational Psychology,0.08222784780731675,0.4846153846153846,390,Psychology
+Management of Technology and Innovation,0.08159771167341254,0.49387755102040815,245,"Business, Management and Accounting"
+Hardware and Architecture,0.08130913661680161,0.42857142857142855,35,Computer Science
+Urban Studies,0.08126987530878116,0.4634146341463415,41,Social Sciences
+Information Systems,0.0808554728102504,0.46615384615384614,650,Computer Science
+Signal Processing,0.08078496895762685,0.4935064935064935,77,Computer Science
+Social Psychology,0.08058626966699656,0.46774193548387094,744,Psychology
+Experimental and Cognitive Psychology,0.08050304843653254,0.4797136038186158,419,Psychology
+Clinical Psychology,0.07968090577786974,0.4681960375391032,959,Psychology
+Nephrology,0.07963395850707097,0.42857142857142855,28,Medicine
+Media Technology,0.07961211405312413,0.375,48,Engineering
+Research and Theory,0.07906005663365388,0.4782608695652174,69,Nursing
+Business and International Management,0.07900045219698457,0.4375,112,"Business, Management and Accounting"
+Automotive Engineering,0.07884834956628063,0.45652173913043476,92,Engineering
+Artificial Intelligence,0.0786272238148442,0.45828144458281445,803,Computer Science
+Building and Construction,0.07794913404838104,0.42696629213483145,89,Engineering
+Rehabilitation,0.07769111500161154,0.4,20,Medicine
+Industrial and Manufacturing Engineering,0.07742666047117566,0.4221105527638191,199,Engineering
+Cognitive Neuroscience,0.07741912566582557,0.40372670807453415,1127,Neuroscience
+"Health, Toxicology and Mutagenesis",0.07728619538355631,0.38306451612903225,248,Environmental Science
+Computer Vision and Pattern Recognition,0.07693815737664952,0.42953020134228187,447,Computer Science
+Language and Linguistics,0.07657759716555217,0.40540540540540543,518,Arts and Humanities
+Computer Networks and Communications,0.07656916783919857,0.4290322580645161,310,Computer Science
+Sensory Systems,0.07616705378998474,0.38235294117647056,102,Neuroscience
+Sociology and Political Science,0.07580470373486514,0.4150717703349282,836,Social Sciences
+Demography,0.0758017675494536,0.4311377245508982,167,Social Sciences
+Safety Research,0.07577850978076493,0.4090909090909091,88,Social Sciences
+Economics and Econometrics,0.07541386043364176,0.4052145573058121,1841,"Economics, Econometrics and Finance"
+Pollution,0.0753558600353697,0.40609137055837563,197,Environmental Science
+Finance,0.0747001057883371,0.4264264264264264,333,"Economics, Econometrics and Finance"
+Neurology,0.07446040011065981,0.3736059479553903,538,Medicine
+Orthopedics and Sports Medicine,0.07439123768013454,0.4117647058823529,34,Medicine
+Conservation,0.07384548036704609,0.39622641509433965,106,Arts and Humanities
+"Public Health, Environmental and Occupational Health",0.07377748287678575,0.36774193548387096,155,Medicine
+"Safety, Risk, Reliability and Quality",0.07341039643925247,0.40625,32,Engineering
+Neuropsychology and Physiological Psychology,0.07335136559817645,0.47619047619047616,21,Psychology
+Linguistics and Language,0.07277126848468873,0.38461538461538464,26,Social Sciences
+General Agricultural and Biological Sciences,0.07276080725546116,0.38497652582159625,213,Agricultural and Biological Sciences
+Pharmacology,0.07271748088463979,0.32075471698113206,53,Medicine
+Health,0.07264676963175769,0.4044943820224719,89,Social Sciences
+"Radiology, Nuclear Medicine and Imaging",0.0720061052447769,0.3629032258064516,124,Medicine
+Physiology,0.07195415558775814,0.3609022556390977,133,Medicine
+Transportation,0.07172660836660218,0.39473684210526316,38,Social Sciences
+Biomedical Engineering,0.07172624356843837,0.35947712418300654,306,Engineering
+Biomaterials,0.07139219350472154,0.350210970464135,237,Materials Science
+"Management, Monitoring, Policy and Law",0.07122918992830132,0.3605150214592275,233,Environmental Science
+Museology,0.07113679499929933,0.43103448275862066,116,Arts and Humanities
+Gender Studies,0.07106592438996771,0.39473684210526316,76,Social Sciences
+"Issues, ethics and legal aspects",0.07073437841825089,0.3695652173913043,92,Nursing
+Literature and Literary Theory,0.07067848676690312,0.37924528301886795,530,Arts and Humanities
+"Surfaces, Coatings and Films",0.07061669299135999,0.423728813559322,59,Materials Science
+Dermatology,0.07053057091196754,0.36363636363636365,33,Medicine
+Pulmonary and Respiratory Medicine,0.06970143020515908,0.31313131313131315,198,Medicine
+Analytical Chemistry,0.06962602100306839,0.337037037037037,270,Chemistry
+Food Science,0.06939083340682904,0.3629032258064516,372,Agricultural and Biological Sciences
+Obstetrics and Gynecology,0.06932040444163116,0.3448275862068966,29,Medicine
+Electrochemistry,0.06904521765850694,0.3150684931506849,73,Chemistry
+Water Science and Technology,0.06886335654661008,0.32338308457711445,201,Environmental Science
+"General Economics, Econometrics and Finance",0.06850580245584806,0.33791208791208793,364,"Economics, Econometrics and Finance"
+Global and Planetary Change,0.06837815232072093,0.3323943661971831,355,Environmental Science
+Polymers and Plastics,0.06814680202928573,0.3406113537117904,229,Materials Science
+Plant Science,0.06806810120500838,0.3153061224489796,980,Agricultural and Biological Sciences
+Oncology,0.06800130027624497,0.3178294573643411,129,Medicine
+Hematology,0.06797246012875502,0.17647058823529413,34,Medicine
+Materials Chemistry,0.0679272778252899,0.325,1080,Materials Science
+Civil and Structural Engineering,0.06776931869529199,0.29775280898876405,178,Engineering
+Environmental Engineering,0.06772310202165643,0.2809917355371901,242,Environmental Science
+Pathology and Forensic Medicine,0.06763922939479611,0.373134328358209,67,Medicine
+"Endocrinology, Diabetes and Metabolism",0.06749622936082571,0.2,70,Medicine
+Nutrition and Dietetics,0.06748687255433476,0.3151028600100351,1993,Nursing
+Psychiatry and Mental health,0.06746006929948034,0.32,75,Medicine
+Behavioral Neuroscience,0.06744310453811454,0.2826086956521739,46,Neuroscience
+"Geography, Planning and Development",0.06675086408833436,0.3333333333333333,45,Social Sciences
+Control and Systems Engineering,0.06669354349730466,0.3028571428571429,175,Engineering
+Archeology,0.06652840084016189,0.30434782608695654,299,Arts and Humanities
+Modeling and Simulation,0.06651643074650643,0.31985294117647056,272,Mathematics
+Ocean Engineering,0.06644874297906357,0.2403846153846154,104,Engineering
+Insect Science,0.0663705250941176,0.27205882352941174,136,Agricultural and Biological Sciences
+Mechanical Engineering,0.06604540791453489,0.3135593220338983,236,Engineering
+Environmental Chemistry,0.0660408394277257,0.2808988764044944,89,Environmental Science
+Ecology,0.06599884174981589,0.27807486631016043,374,Environmental Science
+Emergency Medicine,0.06596857407493162,0.2692307692307692,26,Medicine
+Ecological Modeling,0.06595878465540618,0.38095238095238093,42,Environmental Science
+Epidemiology,0.06571886390318957,0.3235294117647059,170,Medicine
+Developmental Neuroscience,0.06570201915356609,0.32727272727272727,55,Neuroscience
+Electrical and Electronic Engineering,0.06558221549265245,0.28668941979522183,586,Engineering
+Animal Science and Zoology,0.06549089518374439,0.3069306930693069,101,Agricultural and Biological Sciences
+Cellular and Molecular Neuroscience,0.06508451257472944,0.26463104325699743,393,Neuroscience
+Political Science and International Relations,0.0650071930436614,0.2976190476190476,336,Social Sciences
+Religious studies,0.06500383431061216,0.3014354066985646,209,Arts and Humanities
+Computer Graphics and Computer-Aided Design,0.06482530219974632,0.3170731707317073,41,Computer Science
+Mechanics of Materials,0.0647019246503638,0.29914529914529914,117,Engineering
+Organic Chemistry,0.06441642337194353,0.28454545454545455,1100,Chemistry
+Cardiology and Cardiovascular Medicine,0.06434598492889364,0.2740740740740741,135,Medicine
+Biochemistry,0.06425999681126984,0.28,25,Medicine
+Infectious Diseases,0.06405815307848096,0.23376623376623376,77,Medicine
+"Pediatrics, Perinatology and Child Health",0.06404772052488512,0.2708333333333333,96,Medicine
+Statistics and Probability,0.06398428076863749,0.29048843187660667,389,Mathematics
+Statistical and Nonlinear Physics,0.06393740784606634,0.311787072243346,263,Physics and Astronomy
+Rheumatology,0.06367611955277358,0.296875,64,Medicine
+Nature and Landscape Conservation,0.06345816061294256,0.3106796116504854,103,Environmental Science
+Spectroscopy,0.06281105805799445,0.22929936305732485,314,Chemistry
+Aquatic Science,0.062477415745763556,0.21505376344086022,93,Agricultural and Biological Sciences
+Endocrine and Autonomic Systems,0.06229293597544414,0.22549019607843138,102,Neuroscience
+Cultural Studies,0.06220993295111104,0.2916666666666667,120,Social Sciences
+Music,0.062124557473091556,0.27586206896551724,145,Arts and Humanities
+Surgery,0.06200586762882209,0.28225806451612906,248,Medicine
+Soil Science,0.06196298703733817,0.24836601307189543,153,Agricultural and Biological Sciences
+Law,0.06164639823129111,0.24822695035460993,141,Social Sciences
+Radiation,0.06160264294401965,0.2421875,128,Physics and Astronomy
+Applied Mathematics,0.061564045433874184,0.30077519379844964,645,Mathematics
+Inorganic Chemistry,0.060687149593272635,0.25925925925925924,405,Chemistry
+Aerospace Engineering,0.06048745543546749,0.22527472527472528,182,Engineering
+Agronomy and Crop Science,0.060349307084420004,0.2077922077922078,154,Agricultural and Biological Sciences
+Development,0.05908813243216065,0.20689655172413793,29,Social Sciences
+Ophthalmology,0.05827214932660379,0.23076923076923078,26,Medicine
+Computational Theory and Mathematics,0.05812508784518923,0.25203252032520324,123,Computer Science
+Instrumentation,0.057834578687689216,0.18181818181818182,66,Physics and Astronomy
+Physical and Theoretical Chemistry,0.05758850989140126,0.25225225225225223,111,Chemistry
+Visual Arts and Performing Arts,0.0575704335549311,0.25471698113207547,212,Arts and Humanities
+"Electronic, Optical and Magnetic Materials",0.05737432699088185,0.1937984496124031,258,Materials Science
+Leadership and Management,0.05704580768837061,0.3217391304347826,230,Nursing
+Philosophy,0.05701720905358359,0.2,385,Arts and Humanities
+"Ecology, Evolution, Behavior and Systematics",0.05677815959727066,0.2727272727272727,253,Agricultural and Biological Sciences
+Anthropology,0.05598612145782115,0.21428571428571427,56,Social Sciences
+Computational Mechanics,0.05567965314995282,0.23595505617977527,89,Engineering
+Complementary and alternative medicine,0.0554990556738567,0.27906976744186046,43,Medicine
+Reproductive Medicine,0.05542081819527485,0.2,40,Medicine
+Critical Care and Intensive Care Medicine,0.053987693619192235,0.2,20,Medicine
+Genetics,0.05346270027766322,0.08823529411764706,34,Medicine
+"Atomic and Molecular Physics, and Optics",0.052759547891367276,0.17006802721088435,735,Physics and Astronomy
+Condensed Matter Physics,0.05238853103948201,0.14583333333333334,192,Physics and Astronomy
+General Materials Science,0.051493710371656835,0.1875,32,Materials Science
+Astronomy and Astrophysics,0.05147634312088593,0.13802816901408452,710,Physics and Astronomy
+Numerical Analysis,0.051454675229584884,0.1651376146788991,109,Mathematics
+History,0.05046327311366478,0.1895910780669145,269,Arts and Humanities
+Classics,0.04957997484477004,0.13559322033898305,59,Arts and Humanities
+Ceramics and Composites,0.04918190776730394,0.12121212121212122,33,Materials Science
+Forestry,0.04903806655707717,0.13333333333333333,30,Agricultural and Biological Sciences
+Theoretical Computer Science,0.04619656190757531,0.13793103448275862,29,Mathematics
+Nuclear and High Energy Physics,0.044310808959488523,0.0967741935483871,403,Physics and Astronomy
+History and Philosophy of Science,0.04190116162416465,0.144,125,Arts and Humanities
+Discrete Mathematics and Combinatorics,0.03624630703605106,0.09836065573770492,61,Mathematics
+Geometry and Topology,0.03617195897422722,0.08852459016393442,305,Mathematics
+Mathematical Physics,0.03501306935789842,0.07307692307692308,260,Mathematics
+Algebra and Number Theory,0.03140852221826585,0.05555555555555555,144,Mathematics

@@ -2,7 +2,7 @@
 
 ## Overview
 
-This document provides implementation instructions for computing field-level AI propensity scores using the excess vocabulary method from Kobak et al. (2025). The goal is to measure how heavily each of our 8 fields adopted LLM tools after GPT-3.5, producing a single scalar per field that will serve as the cross-sectional variation in our diff-in-diff regression.
+This document provides implementation instructions for computing field-level AI propensity scores using the excess vocabulary method from Kobak et al. (2025). The goal is to measure how heavily each of our 16 fields adopted LLM tools after GPT-3.5, producing a single scalar per field that will serve as the cross-sectional variation in our diff-in-diff regression.
 
 **Reference:** Kobak, D., González-Márquez, R., Horvát, E.-Á., & Lause, J. (2025). Delving into LLM-assisted writing in biomedical publications through excess vocabulary. *Science Advances*, 11(27), eadt3813.
 
@@ -40,7 +40,7 @@ This CSV contains all 900 excess words identified from 2013 to 2024, along with 
 
 This filtered list is our set of LLM marker words. It should contain approximately 200–379 words. Examples of words that should appear on the list include: delve, intricate, meticulously, pivotal, showcasing, realm, underscore, noteworthy, commendable, grappling, multifaceted, nuanced, paramount, comprehensive, foster, harness, navigate, crucial, elevate, illuminate, embark, emphasize, facilitate, bolster, surpass, landscape, tapestry, testament, vibrant, compelling, innovative, transformative, underscore, leveraging, streamline, robust, advent, burgeoning.
 
-**Important:** The Kobak word list was developed on biomedical (PubMed) abstracts. Some words may not transfer perfectly to all 8 of our fields (e.g., Arts & Humanities may have different baseline usage of words like "intricate" or "nuanced"). This is an acknowledged limitation, but because we are computing a *ratio* of post/pre frequencies within each field, field-specific baseline differences are accounted for — what matters is the *change*.
+**Important:** The Kobak word list was developed on biomedical (PubMed) abstracts. Some words may not transfer perfectly to all 16 of our fields (e.g., Arts & Humanities may have different baseline usage of words like "intricate" or "nuanced"). This is an acknowledged limitation, but because we are computing a *ratio* of post/pre frequencies within each field, field-specific baseline differences are accounted for — what matters is the *change*.
 
 ---
 
@@ -48,7 +48,7 @@ This filtered list is our set of LLM marker words. It should contain approximate
 
 ### Fields
 
-Collect data for each of the following 8 fields, identified by the `primary_topic.field.display_name` variable in OpenAlex:
+Collect data for each of the following 16 fields, identified by the `primary_topic.field.display_name` variable in OpenAlex:
 
 1. Arts & Humanities
 2. Biology
@@ -58,6 +58,14 @@ Collect data for each of the following 8 fields, identified by the `primary_topi
 6. Mathematics
 7. Physics & Astronomy
 8. Psychology
+9. Medicine
+10. Engineering
+11. Social Sciences
+12. Economics, Econometrics and Finance
+13. Environmental Science
+14. Neuroscience
+15. Materials Science
+16. Nursing
 
 ### Time Windows
 
@@ -170,7 +178,7 @@ Compute marker word frequencies for 2020 and 2021 (well before ChatGPT). The pre
 
 ### 4c. Variation across fields
 
-Ensure there is meaningful variation in the propensity scores across the 8 fields. If all fields have scores clustered tightly around, say, 0.05–0.10, there may not be enough cross-sectional variation to power the diff-in-diff. If variation is too low, consider expanding the marker word list or using a different aggregation method (e.g., weighting words by their excess frequency ratio from Kobak et al.).
+Ensure there is meaningful variation in the propensity scores across the 16 fields. If all fields have scores clustered tightly around, say, 0.05–0.10, there may not be enough cross-sectional variation to power the diff-in-diff. If variation is too low, consider expanding the marker word list or using a different aggregation method (e.g., weighting words by their excess frequency ratio from Kobak et al.).
 
 ### 4d. Robustness to word list choice
 
@@ -184,7 +192,7 @@ Try computing scores using subsets of the marker word list (e.g., top 50 words b
 |---|---|---|
 | 1. Get marker words | Kobak et al. GitHub CSV | Filtered list of ~200–379 LLM style words |
 | 2. Collect abstracts | OpenAlex API | ~500+ abstracts per field × 2 time windows |
-| 3. Compute scores | Abstracts + marker words | 8 scalar AI propensity scores (one per field) |
+| 3. Compute scores | Abstracts + marker words | 16 scalar AI propensity scores (one per field) |
 | 4. Validate | Propensity scores | Sanity checks on rankings, variation, and stability |
 
-The output of this process — 8 AI propensity scores — feeds directly into the main regression specification described in `Directions_for_OpenAlex_Data_Collection_Refined.md`.
+The output of this process — 16 AI propensity scores — feeds directly into the main regression specification described in `Directions_for_OpenAlex_Data_Collection_Refined_1.md`.

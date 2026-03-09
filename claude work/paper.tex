@@ -1,0 +1,215 @@
+\documentclass[11pt]{article}
+\usepackage{graphicx}
+\usepackage{setspace}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{float}
+\title{The Impact of AI Adoption on Scientific Surprise in Academic Research}
+\author{
+Ben Heim \hspace{1cm} Adam Tuchler \\
+University of Chicago
+}
+\date{March 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+Put abstract here.
+The abstract should briefly explain:
+1. The research question
+2. The data
+3. The empirical strategy
+4. The main findings
+5. Why the results matter for AI, innovation, and growth.
+(Usually 150–200 words.)
+\end{abstract}
+\noindent \textbf{Keywords:} Artificial Intelligence, Innovation, Scientific Discovery, Knowledge Production
+\bigskip
+\doublespacing
+\section{Introduction}
+\textbf{ADAM TODO: P1 and P2}\\
+We build on Kobak's 2025 analysis that showed that specific keywords became far more common after the introduction of GPT 3.5 to operationalize the propensity of different fields to use LLMs in their research. Using these data, we estimate the effect on research output by the introduction of GPT-4o where we vary the treatment effect by the field propensity we derive from the increase in Kobak's keywords following the introduction of GPT 3.5. This allows for a diff-in-diff analysis where treatment varies between fields. We choose 4o in particular as it 1) gives us time to evaluate the propensity of AI adoption across different fields and 2) it was the first highly performing free model released to the public, unleashing significant capability to everyone.\\
+We collect data using OpenAlex across 16 different fields that vary in their AI propensity. Using these data, we then estimate the effect of the introduction of 4o on the Shannon entropy of the papers (derived from the proportion of different fields cited by the papers).\\
+Our results show that the introduction of 4o led to increase of Shannon entropy in fields as well as an increase in the number of references papers pull on. In short, papers are citing more and citing more diversely.\\
+This paper offers compelling support for the adoption of LLMs in offering researchers potentially more diverse and wider perspectives than they would otherwise have. Moreover, our methodology offers a new way of analyzing the impact of LLMs on research were early Kobak-key-word metrics can be used to describe the propensities of specific fields to use AI, which can then be used as a way to vary the treatment of AI use.\\
+First, we'll cover the related literature that led us to our research question. Then, we'll describe our dataset and the measures we employed in our analysis. Finally, we'll detail our regression specifications and share the results from our analysis.
+Explain the big idea of the paper.
+Typical structure for this section:
+Paragraph 1: Big motivating question about AI and knowledge production.
+Paragraph 2: Why this question matters for innovation and economic growth.
+Paragraph 3: What your paper does differently from existing literature.
+Paragraph 4: Brief explanation of your data and empirical strategy.
+Paragraph 5: Main results.
+Paragraph 6: Contribution to literature.
+Paragraph 7: Roadmap of the paper.
+\section{Background and Related Literature}
+There have been a littany of papers investigating the impact of LLMs on research output. In Hao et al.'s 2026 paper, they find that papers written using AI have a reduced knowledge extent. Their method relies on training a model to predict whether or not a paper was written using generative AI. However, this paper focuses specifically on AI tools in general as opposed to specifically LLM use. It also makes a binary prediction (was AI used as a research method?) as opposed to investigating how LLM use in producing the paper affects the research.\\
+Algaba et al. (2025) investigate the citations that LLMs choose to provide researchers on specific problems and find that LLMs cite very similarly to humans and may even push humans to cite larger works and researchers at rates more than they already do. However, this doesn't make a comment on how humans actually use LLMs to produce research.\\
+Kusemegi et al. (2025) offer a more positive view on LLM aid in producing research, arguing that LLMs both make researchers more productive and push them to engage in a broader set of knowledge in producing this work (e.g., they cite more books). This contradicts the finding of Algaba. However, Kusegmi et al. don't identify a causal effect - instead, they describe the research output of those who use LLMs to produce research.\\
+Our work builds on that of Hao, Algaba, and Kusegmi in attempting to identify a causal impact on the introduction of ChatGPT 4o as it affects the Shannon entropy of research output.a
+Explain how your project connects to the literature on:
+\begin{itemize}
+\item Artificial intelligence and scientific discovery
+\item Innovation and creative destruction
+\item Knowledge recombination and novelty in research
+\end{itemize}
+Discuss key papers and explain how your project differs.
+\section{Data}
+Describe the dataset.
+Explain:
+\begin{itemize}
+\item OpenAlex data source
+\item Time period
+\item Fields of study included
+\item Number of papers in the sample
+\item Key variables constructed
+\end{itemize}
+Include summary statistics later.
+\section{Measuring AI Adoption in Scientific Writing}
+Explain how you measure AI use.
+Topics to include:
+\begin{itemize}
+\item Kobak AI marker words
+\item Construction of the AI signal
+\item Monthly aggregation
+\item Differences across scientific fields
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{shannon-shannon-figures/fig01_propensity_scores.png}
+\caption{AI Propensity Scores by Field. Each bar shows the propensity ratio for a given field, defined as the percentage-point increase in Kobak marker word frequency from the pre-ChatGPT to post-ChatGPT (GPT-3.5) era. Fields are ranked from highest to lowest propensity. Computer Science, Materials Science, and Business \& Management show the highest early LLM adoption.}
+\label{fig:propensity}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{shannon-figures/fig02_marker_words_pre_post.png}
+\caption{Marker Word Frequency Pre vs.\ Post GPT-3.5 by Field. Paired dots show each field's mean marker word rate before and after the release of ChatGPT (December 2022), with arrows indicating the direction and magnitude of change. All 16 fields show increases, but the magnitude varies substantially.}
+\label{fig:marker_words}
+\end{figure}
+
+\section{Measuring Research Surprise}
+Explain the outcome variable.
+Topics:
+\begin{itemize}
+\item Citation combinations
+\item Shannon entropy
+\item Log surprise
+\item Why these capture novelty in research
+\end{itemize}
+Explain how these are calculated.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{shannon-figures/fig05_entropy_distributions.png}
+\caption{Shannon Entropy Distributions, Pre vs.\ Post GPT-4o by Propensity Group. Overlapping histograms show how the distribution of paper-level citation entropy shifts between the pre- and post-4o periods for high-propensity (top) and low-propensity (bottom) fields. High-propensity fields exhibit a more pronounced rightward shift, indicating greater citation diversification after the introduction of GPT-4o.}
+\label{fig:entropy_dist}
+\end{figure}
+
+\section{Empirical Strategy}
+Explain the regression.
+Example:
+\[
+Surprise_{it} = \alpha + \beta \, AIExposure_{it} + \gamma_{field} + \delta_{time} + \epsilon_{it}
+\]
+Explain:
+\begin{itemize}
+\item Dependent variable
+\item Key coefficient of interest ($\beta$)
+\item Field fixed effects
+\item Time fixed effects
+\item Identification strategy
+\end{itemize}
+\section{Results}
+Present main regression results.
+Include:
+\begin{itemize}
+\item Baseline regression
+\item Interpretation of coefficient $\beta$
+\item Economic significance
+\end{itemize}
+Insert tables with regression outputs.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{shannon-figures/fig03_entropy_time_series.png}
+\caption{Shannon Entropy Over Time: High vs.\ Low AI Propensity Fields. Monthly mean Shannon entropy for fields above (blue) and below (red) the median propensity score, with fitted trend lines for the pre- and post-GPT-4o periods. The vertical dashed line marks the GPT-4o release (November 2024). High-propensity fields show a steeper increase in citation entropy after the cutoff.}
+\label{fig:entropy_timeseries}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{shannon-figures/fig04_event_study_entropy.png}
+\caption{Event Study: Shannon Entropy. Quarterly interaction coefficients (propensity $\times$ quarter) with 95\% confidence intervals, with 2024 Q3 as the reference period. The treatment effect on Shannon entropy emerges in late 2024 and grows through 2025, consistent with gradual diffusion of GPT-4o across fields.}
+\label{fig:event_study}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{shannon-figures/fig09_forest_plot.png}
+\caption{Treatment $\times$ Trend Coefficients Across Dependent Variables. Forest plot showing the estimated treatment $\times$ time trend coefficient ($\beta$) and 95\% confidence intervals for all seven outcome variables. Shannon entropy, number of distinct fields cited, and citation HHI (inverted) show significant effects, while KL surprise and reference count do not. The pattern is consistent with AI-driven citation diversification rather than a general increase in citing behavior.}
+\label{fig:forest_plot}
+\end{figure}
+
+\section{Robustness Checks}
+Discuss additional tests:
+\begin{itemize}
+\item Alternative surprise measures
+\item Different time windows
+\item Field-by-time fixed effects
+\item Alternative AI exposure measures
+\end{itemize}
+Explain that results remain consistent across specifications.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{shannon-figures/fig10_parallel_trends.png}
+\caption{Parallel Trends Test: Shannon Entropy (18-Month Pre-Period). Monthly mean Shannon entropy for high- and low-propensity fields in the 18 months prior to GPT-4o, with fitted trend lines. The formal test of differential pre-trends (propensity $\times$ time trend, with field fixed effects) yields $p = 0.56$, indicating no statistically significant divergence in the pre-period.}
+\label{fig:parallel_trends}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{shannon-figures/fig08_within_field_share.png}
+\caption{Within-Field Citation Share Over Time: High vs.\ Low Propensity. The mirror image of the entropy result: the share of citations directed to papers within a paper's own field declines more steeply in high-propensity fields after the GPT-4o release, consistent with researchers drawing on a broader range of disciplines.}
+\label{fig:within_field}
+\end{figure}
+
+\section{Discussion}
+Interpret the results.
+Possible interpretations:
+\begin{itemize}
+\item AI changes the structure of knowledge recombination
+\item AI affects how researchers search the literature
+\item Implications for future innovation
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.85\textwidth]{shannon-figures/fig07_field_scatter.png}
+\caption{Field-Level Scatter: AI Propensity vs.\ Change in Shannon Entropy. Each point represents one of the 16 fields. The $x$-axis is the GPT-3.5 propensity score; the $y$-axis is the change in mean Shannon entropy from the pre- to post-4o period. The positive correlation ($r = 0.603$) confirms that fields with greater early LLM adoption experienced larger increases in citation diversity.}
+\label{fig:field_scatter}
+\end{figure}
+
+\section{Limitations}
+Discuss limitations of the study.
+Examples:
+\begin{itemize}
+\item AI adoption is measured indirectly
+\item Observational data limitations
+\item Potential omitted variables
+\end{itemize}
+\section{Conclusion}
+Summarize the paper.
+Structure:
+\begin{itemize}
+\item Restate research question
+\item Summarize main findings
+\item Implications for innovation and growth
+\item Directions for future research
+\end{itemize}
+\section*{References}
+https://www.nature.com/articles/s41586-025-09922-y\#Sec7
+https://aclanthology.org/2025.findings-naacl.381.pdf
+References will go here.
+\end{document}
