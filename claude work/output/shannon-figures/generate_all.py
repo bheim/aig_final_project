@@ -179,6 +179,9 @@ fig, ax = plt.subplots(figsize=(12, 6))
 monthly = df.groupby(["year_month", "prop_group"])["surprise_entropy"].mean().reset_index()
 monthly["date"] = pd.to_datetime(monthly["year_month"] + "-15")
 monthly = monthly.sort_values("date")
+# Restrict to 18-month pre-period window (matching parallel trends figure)
+pt_start = cutoff - pd.DateOffset(months=18)
+monthly = monthly[monthly["date"] >= pt_start]
 
 for group, color in [("High AI Propensity", HIGH_COLOR), ("Low AI Propensity", LOW_COLOR)]:
     gdf = monthly[monthly["prop_group"] == group]
@@ -260,6 +263,10 @@ for q in interact_quarters:
     coefs.append({"quarter": q, "coef": c["coef"], "se": c["se"], "p": c["p"]})
 coefs.append({"quarter": omit_q, "coef": 0.0, "se": 0.0, "p": 1.0})
 cdf = pd.DataFrame(coefs).sort_values("quarter").reset_index(drop=True)
+# Restrict displayed quarters to 18-month window before cutoff onward (matching fig03/fig10)
+es_start_q = (cutoff - pd.DateOffset(months=18)).to_period("Q").strftime("%YQ%q")
+# Convert to comparable format: es_start_q is like "2023Q2"
+cdf = cdf[cdf["quarter"] >= es_start_q].reset_index(drop=True)
 
 fig, ax = plt.subplots(figsize=(12, 5.5))
 x_pos = np.arange(len(cdf))
@@ -447,6 +454,9 @@ fig, ax = plt.subplots(figsize=(12, 6))
 monthly_wfs = df.groupby(["year_month", "prop_group"])["within_field_share"].mean().reset_index()
 monthly_wfs["date"] = pd.to_datetime(monthly_wfs["year_month"] + "-15")
 monthly_wfs = monthly_wfs.sort_values("date")
+# Restrict to 18-month pre-period window (matching parallel trends and fig03)
+pt_start_wfs = cutoff - pd.DateOffset(months=18)
+monthly_wfs = monthly_wfs[monthly_wfs["date"] >= pt_start_wfs]
 
 for group, color in [("High AI Propensity", HIGH_COLOR), ("Low AI Propensity", LOW_COLOR)]:
     gdf = monthly_wfs[monthly_wfs["prop_group"] == group]
