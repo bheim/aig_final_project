@@ -18,8 +18,35 @@ from collections import defaultdict, Counter
 from config import DATA_DIR, FIELDS
 
 
-# All fields we track (our 8 + a catch-all for others)
-ALL_FIELDS = FIELDS + ["Other"]
+# All 26 OpenAlex fields (full ASJC classification, no "Other" catch-all)
+ALL_FIELDS = [
+    "Agricultural and Biological Sciences",
+    "Arts and Humanities",
+    "Biochemistry, Genetics and Molecular Biology",
+    "Business, Management and Accounting",
+    "Chemical Engineering",
+    "Chemistry",
+    "Computer Science",
+    "Decision Sciences",
+    "Dentistry",
+    "Earth and Planetary Sciences",
+    "Economics, Econometrics and Finance",
+    "Energy",
+    "Engineering",
+    "Environmental Science",
+    "Health Professions",
+    "Immunology and Microbiology",
+    "Materials Science",
+    "Mathematics",
+    "Medicine",
+    "Neuroscience",
+    "Nursing",
+    "Pharmacology, Toxicology and Pharmaceutics",
+    "Physics and Astronomy",
+    "Psychology",
+    "Social Sciences",
+    "Veterinary",
+]
 
 
 def load_phase2_data():
@@ -41,10 +68,12 @@ def flatten_papers(papers_dict):
 
 
 def map_field(field_name):
-    """Map a field name to one of our 8 fields or 'Other'."""
-    if field_name in FIELDS:
+    """Map a field name to one of the 26 OpenAlex fields. Returns None if unknown."""
+    if field_name in ALL_FIELDS_SET:
         return field_name
-    return "Other"
+    return None
+
+ALL_FIELDS_SET = set(ALL_FIELDS)
 
 
 def build_baseline_distribution(all_papers, ref_fields, cutoff_date="2022-11-01"):
@@ -90,6 +119,8 @@ def build_baseline_distribution(all_papers, ref_fields, cutoff_date="2022-11-01"
             if ref_field_raw is None or ref_field_raw == "Unknown":
                 continue
             ref_field = map_field(ref_field_raw)
+            if ref_field is None:
+                continue
             ref_counts[focal_field][ref_field] += 1
 
     print(f"  Baseline papers used: {n_baseline}")
@@ -184,6 +215,8 @@ def compute_surprise_for_papers(all_papers, ref_fields, baseline):
             if ref_field_raw is None or ref_field_raw == "Unknown":
                 continue  # skip unresolved references
             ref_field = map_field(ref_field_raw)
+            if ref_field is None:
+                continue
             ref_field_counts[ref_field] += 1
             n_refs_resolved += 1
 
@@ -216,8 +249,8 @@ def compute_surprise_for_papers(all_papers, ref_fields, baseline):
         # concentration. HHI=1 means all refs in one field, lower = more diverse.
         hhi = sum(s ** 2 for s in q_i.values())
 
-        # Share of references pointing to "Other" (outside our tracked fields)
-        other_share = q_i.get("Other", 0)
+        # Share of references pointing outside the focal paper's own field
+        other_share = 1.0 - within_field_share
 
         rows.append({
             "paper_id": paper.get("id"),

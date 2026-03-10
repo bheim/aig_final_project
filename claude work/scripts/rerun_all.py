@@ -30,11 +30,21 @@ for col in ["within_field_share", "citation_hhi", "other_field_share"]:
 
 print(f"Loaded {len(df)} observations, {df['field'].nunique()} fields")
 
+# ── Restrict to 18-month pre-period window ──
+# We use only 18 months before the GPT-4o cutoff (where parallel trends hold, p=0.56)
+# plus all post-period data.
+from config import POST_4O_DATE
+_cutoff = pd.to_datetime(POST_4O_DATE)
+_window_start = _cutoff - pd.DateOffset(months=18)  # 2023-05-01
+df["pub_date_dt"] = pd.to_datetime(df["publication_date"])
+n_before = len(df)
+df = df[df["pub_date_dt"] >= _window_start].reset_index(drop=True)
+print(f"Restricted to 18-month pre-period window (>= {_window_start.date()}): "
+      f"{n_before} -> {len(df)} observations")
+
 # Create treatment × time_trend variable
 # time_trend = months since post-4o cutoff (0 for pre, 1,2,3... for post months)
-from config import POST_4O_DATE
-df["pub_date_dt"] = pd.to_datetime(df["publication_date"])
-cutoff_dt = pd.to_datetime(POST_4O_DATE)
+cutoff_dt = _cutoff
 df["months_post"] = np.maximum(
     ((df["pub_date_dt"] - cutoff_dt).dt.days / 30.44).round(), 0
 ).astype(float)
