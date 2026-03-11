@@ -1,5 +1,7 @@
 ============================================================================================================================================
 REGRESSION RESULTS: Impact of AI Adoption on Citation Behavior
+Estimation window: 18-month pre-period (May 2023) + post-period through Dec 2025
+Shannon entropy computed over 26 OpenAlex ASJC fields
 ============================================================================================================================================
 
 Variable                                    (1) No FE  (2) Log Surprise(3) Log Surprise+T(4) Distinct Fields(5) Distinct Fields+T(6) Within-Field Share(7) Within-Field Share+T  (8) Citation HHI(9) Citation HHI+T(10) Reference Count(11) Reference Count+T(12) Shannon Entropy(13) Shannon Entropy+T(14) Other-Field Share(15) Other-Field Share+T
